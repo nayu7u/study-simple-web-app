@@ -1,4 +1,9 @@
 services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
   web:
     build:
       context: .
@@ -14,4 +19,5 @@ services:
       - ./:/workspace
     user: "${UID}:${GID}"
     tty: true
-
+    depends_on:
+      - db
