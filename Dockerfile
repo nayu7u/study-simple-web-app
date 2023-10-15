@@ -6,13 +6,13 @@ ARG USERNAME
 RUN groupadd -g $GID $GROUPNAME \
     && useradd -l -m -s /bin/bash -u $UID -g $GID $USERNAME
 RUN apt-get update -qq \
-    && apt-get -y install --no-install-recommends make build-essential git \
+    && apt-get -y install --no-install-recommends make build-essential git libpq-dev\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 RUN git help
 WORKDIR /workspace
-# COPY Gemfile /workspace/Gemfile
-# COPY Gemfile.lock /workspace/Gemfile.lock
-# RUN bundle install
-# COPY . /workspace
+COPY Gemfile /workspace/Gemfile
+COPY Gemfile.lock /workspace/Gemfile.lock
+RUN bundle install
+COPY . /workspace
 
