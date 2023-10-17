@@ -7,6 +7,7 @@ services:
   web:
     build:
       context: .
+      dockerfile: ./docker/web/Dockerfile
       args:
         - USERNAME=${USERNAME}
         - GROUPNAME=${GROUPNAME}
@@ -21,3 +22,20 @@ services:
     tty: true
     depends_on:
       - db
+  ansible:
+    build:
+      context: .
+      dockerfile: ./docker/ansible/Dockerfile
+      args:
+        - USERNAME=${USERNAME}
+        - GROUPNAME=${GROUPNAME}
+        - UID=${UID}
+        - GID=${GID}
+    volumes:
+      - "$SSH_AUTH_SOCK:/tmp/ssh-agent.sock"
+      - "~/.ssh/:/workspace/.ssh/"
+    environment:
+      SSH_AUTH_SOCK: "/tmp/ssh-agent.sock"
+    tty: true
+    working_dir: /workspace
+    user: "${UID}:${GID}"
