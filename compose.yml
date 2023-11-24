@@ -34,6 +34,8 @@ services:
     volumes:
       - "$SSH_AUTH_SOCK:/tmp/ssh-agent.sock"
       - "~/.ssh/:/workspace/.ssh/"
+      - "./infra/ansible:/workspace/ansible"
+      - "./infra/vagrant:/workspace/vagrant"
     environment:
       SSH_AUTH_SOCK: "/tmp/ssh-agent.sock"
     tty: true
