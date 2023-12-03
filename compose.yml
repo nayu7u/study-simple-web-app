@@ -39,5 +39,5 @@ services:
     environment:
       SSH_AUTH_SOCK: "/tmp/ssh-agent.sock"
     tty: true
-    working_dir: /workspace
+    working_dir: /workspace/ansible
     user: "${UID}:${GID}"
