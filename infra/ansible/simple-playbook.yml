@@ -62,6 +62,11 @@
     - name: Install ruby by rbenv
       shell: bash -lc "rbenv install 3.2.2"
       become: false
+      when: not rbenv_repo_stat.stat.exists
+    - name: add postgres
+      yum:
+        name: postgresql-server
+        state: latest
 
       
 # - postgresql-devel
