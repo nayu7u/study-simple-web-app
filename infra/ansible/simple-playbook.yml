@@ -30,26 +30,31 @@
         - zlib-devel
         - gdbm-devel
         - ncurses-devel
+
     - name: Check rbenv existence of rbenv repository
       stat:
         path: /home/vagrant/.rbenv
       register: rbenv_repo_stat
+
     - name: Install rbenv
       git:
         repo: https://github.com/rbenv/rbenv.git 
         dest: /home/vagrant/.rbenv
       when: not rbenv_repo_stat.stat.exists
       become: false
+
     - name: Check existence of ruby-build repository
       stat:
         path: /home/vagrant/.rbenv/plugins/ruby-build
       register: ruby_build_repo_stat
+
     - name: Install ruby-build
       git:
         repo: https://github.com/rbenv/ruby-build.git
         dest: /home/vagrant/.rbenv/plugins/ruby-build
       when: not ruby_build_repo_stat.stat.exists
       become: false
+
     - name: Append rbenv init to .bash_profile
       blockinfile:
         dest: /home/vagrant/.bash_profile
@@ -59,10 +64,12 @@
           export PATH="$RBENV_ROOT/bin:$PATH"
           eval "$(rbenv init - bash)"
       when: not rbenv_repo_stat.stat.exists
+
     - name: Install ruby by rbenv
       shell: bash -lc "rbenv install 3.2.2"
       become: false
       when: not rbenv_repo_stat.stat.exists
+
     - name: add postgres
       yum:
         name: postgresql-server
