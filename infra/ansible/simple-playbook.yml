@@ -6,6 +6,12 @@
       user:
         name: app
         password: 
+
+    - name: Add SSH public key to authorized_key
+      ansible.posix.authorized_key:
+        user: app
+        state: present
+        key: "{{ lookup('file', './templates/id_25519.pub') }}"
           
     - name: Be update all packages
       yum:

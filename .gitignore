@@ -39,3 +39,6 @@
 
 # Ignore .vagrant
 /infra/vagrant/.vagrant
+
+# Ignore keys
+/infra/ansible/templates/id_25519*
