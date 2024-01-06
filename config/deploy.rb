@@ -1,14 +1,15 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.18.0"
 
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
+set :application, "study-simple-web-app"
+set :repo_url, "ssh://git@github.com/nayu7u/study-simple-web-app.git"
 
 # Default branch is :master
+set :branch, "main"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
+set :deploy_to, "/var/www/my_app_name"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
