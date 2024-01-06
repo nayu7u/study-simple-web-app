@@ -81,5 +81,12 @@
         name: postgresql-server
         state: latest
 
+    - name: mkdir deploy directory
+      file:
+        path: "/var/www"
+        state: directory
+        owner: "app"
+        group: "app"
+        mode: "775"
       
 # - postgresql-devel
